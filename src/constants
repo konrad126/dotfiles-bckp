@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
+# 
 APP_DIR="$(cd ..; pwd)"
 
+# folder containing stub data
+SOURCE_FOLDER="../test"
+
+# config folder path
 CONFIG_PATH="$APP_DIR/config"
 
+# modules folder path
 MODULES_PATH="$APP_DIR/modules"
 
-echo $CONFIG_PATH

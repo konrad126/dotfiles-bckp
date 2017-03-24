@@ -2,9 +2,6 @@
 
 source modules_functions
 
-
 # process all modules
-for f in "../modules"/*;
-do
-	process_module $f
-done
+init_modules
+process_modules

@@ -42,8 +42,7 @@ function init_module()
 	fi
 
 	echo "Ititializing module: $module"
-	cp -v "$MODULES_PATH/$module/config" "$CONFIG_PATH/$module.config"
-
+	ditto -v "$MODULES_PATH/$module/config" "$CONFIG_PATH/$module.config"
 }
 
 
@@ -51,7 +50,7 @@ function init_module()
 # init all modules
 function init_modules()
 {
-	for f in "../modules"/*;
+	for f in "$MODULES_PATH"/*;
 	do
 		module=$(basename $f)
 		init_module $module
@@ -79,8 +78,8 @@ function process_module()
 		return 1
 	fi
 
-	source "../modules/$module/config"
-	source process_functions
+	source "$CONFIG_PATH/$module.config"
+	source file_functions
 	process_directory $SOURCE_FOLDER $DEST_FOLDER $MODE "${IGNORE[@]}"
 	echo "Done"
 }
