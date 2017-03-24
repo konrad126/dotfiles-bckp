@@ -21,7 +21,7 @@ function module_exists()
 # $1 module name
 function module_config_exists()
 {
-	module_config_path="../modules/$1/config"
+	module_config_path="../config/$1.config"
 	if [ -e $module_config_path ];then
 		return 0
 	fi
@@ -33,10 +33,40 @@ function module_config_exists()
 # args:
 #
 # $1 module name
+function init_module()
+{
+	module=$1
+	if module_config_exists $module;then
+		echo "Module $module already initialized"
+		return
+	fi
+
+	echo "Ititializing module: $module"
+	cp -v "../modules/$module/config" "../config/$module.config"
+
+}
+
+
+#
+# init all modules
+function init_modules()
+{
+	for f in "../modules"/*;
+	do
+		module=$(basename $f)
+		init_module $module
+	done
+}
+
+
+#
+# args:
+#
+# $1 module name
 function process_module()
 {
 
-	module=$(basename $1)
+	module=$1
 	echo "Processing module: $module";
 
 	if ! module_exists $module;then
@@ -53,6 +83,17 @@ function process_module()
 	source process_functions
 	process_directory $SOURCE_FOLDER $DEST_FOLDER $MODE "${IGNORE[@]}"
 	echo "Done"
-	
 }
 
+
+#
+# process all modules
+function process_modules()
+{
+	# process all modules
+	for f in "../modules"/*;
+	do
+		module=$(basename $f)
+		process_module $module
+	done
+}

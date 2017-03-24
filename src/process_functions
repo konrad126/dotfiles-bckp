@@ -17,6 +17,7 @@ function in_array()
 	return 1
 }
 
+
 # process file - copy or make symbolic links
 #
 # args:
@@ -47,6 +48,7 @@ function process_file()
 	fi
 
 }
+
 
 # process directory and copy/link folders/files
 # args
@@ -79,5 +81,4 @@ function process_directory()
 			process_file $source_dir $destination_dir $current_file $mode
 		fi
 	done
-
 }
