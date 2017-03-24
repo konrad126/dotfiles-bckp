@@ -4,7 +4,7 @@
 APP_DIR="$(pwd)"
 
 # config stub file path
-CONFIG_STUB_PATH="$APP_DIR/src/stubs/config/config"
+CONFIG_STUB_PATH="$APP_DIR/stubs/config/config"
 
 # config file destination path
 CONFIG_PATH="$APP_DIR/config"
