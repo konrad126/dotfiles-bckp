@@ -1,6 +1,7 @@
 
 #!/usr/bin/env bash
-source constants
+
+source src/constants
 #
 # args:
 #
@@ -37,6 +38,7 @@ function module_config_exists()
 # $1 module name
 function init_module()
 {
+
 	local module=$1
 	if module_config_exists $module;then
 		echo "Module $module already initialized"
@@ -81,7 +83,7 @@ function process_module()
 	fi
 
 	source "$CONFIG_PATH/$module.config"
-	source file_functions
+	source src/file_functions
 	process_directory $MODULES_PATH/$module $DEST_FOLDER $MODE "${IGNORE[@]}"
 	echo "Done"
 }

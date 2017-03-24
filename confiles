@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source modules_functions
+source src/modules_functions
 
 # process all modules
 init_modules
