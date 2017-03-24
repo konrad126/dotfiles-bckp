@@ -45,7 +45,7 @@ function init_module()
 		return
 	fi
 
-	echo "Ititializing module: $module"
+	echo "Initializing module: $module"
 	ditto -v $CONFIG_STUB_PATH "$CONFIG_PATH/$module.config"
 }
 
