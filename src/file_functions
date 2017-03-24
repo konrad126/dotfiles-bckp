@@ -62,8 +62,7 @@ function process_directory()
 	local destination_dir=$2
 	local mode=$3
 	shift 3
-	local ignore=$@
-	
+	local ignore=$@	
 	
 	shopt -s dotglob
 	# iterate and process all files/directories in source $1 

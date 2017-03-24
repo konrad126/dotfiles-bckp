@@ -7,7 +7,8 @@ source constants
 # $1 module name
 function module_exists()
 {
-	module_path="$MODULES_PATH/$1"
+	local module_name=$1
+	local module_path="$MODULES_PATH/$module_name"
 	if [ -d $module_path ];then
 		return 0
 	fi
@@ -21,7 +22,8 @@ function module_exists()
 # $1 module name
 function module_config_exists()
 {
-	module_config_path="$CONFIG_PATH/$1.config"
+	local module_name=$1
+	local module_config_path="$CONFIG_PATH/$module_name.config"
 	if [ -e $module_config_path ];then
 		return 0
 	fi
@@ -35,14 +37,14 @@ function module_config_exists()
 # $1 module name
 function init_module()
 {
-	module=$1
+	local module=$1
 	if module_config_exists $module;then
 		echo "Module $module already initialized"
 		return
 	fi
 
 	echo "Ititializing module: $module"
-	ditto -v "$MODULES_PATH/$module/config" "$CONFIG_PATH/$module.config"
+	ditto -v $CONFIG_STUB_PATH "$CONFIG_PATH/$module.config"
 }
 
 
@@ -65,7 +67,7 @@ function init_modules()
 function process_module()
 {
 
-	module=$1
+	local module=$1
 	echo "Processing module: $module";
 
 	if ! module_exists $module;then
@@ -80,7 +82,7 @@ function process_module()
 
 	source "$CONFIG_PATH/$module.config"
 	source file_functions
-	process_directory $SOURCE_FOLDER $DEST_FOLDER $MODE "${IGNORE[@]}"
+	process_directory $MODULES_PATH/$module $DEST_FOLDER $MODE "${IGNORE[@]}"
 	echo "Done"
 }
 
@@ -90,7 +92,7 @@ function process_module()
 function process_modules()
 {
 	# process all modules
-	for f in "../modules"/*;
+	for f in $MODULES_PATH/*;
 	do
 		module=$(basename $f)
 		process_module $module

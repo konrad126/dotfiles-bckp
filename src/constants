@@ -3,12 +3,13 @@
 # 
 APP_DIR="$(cd ..; pwd)"
 
-# folder containing stub data
-SOURCE_FOLDER="../test"
 
-# config folder path
+# config stub file path
+CONFIG_STUB_PATH="$APP_DIR/stubs/config/config"
+
+# config file destination path
 CONFIG_PATH="$APP_DIR/config"
 
 # modules folder path
-MODULES_PATH="$APP_DIR/modules"
+MODULES_PATH="$APP_DIR/stubs/modules"
 
