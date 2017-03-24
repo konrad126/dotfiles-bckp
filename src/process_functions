@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+
+# args
+# 
+# $1 - needle
+# $2 - haystack
+function in_array()
+{
+	local hay needle=$1
+	shift
+	for hay in $@;
+	do
+		if [ "$hay" = "$needle" ];then
+			return 0
+		fi
+	done
+	return 1
+}
+
+# process file - copy or make symbolic links
+#
+# args:
+# $1 - source directory
+# $2 - destination directory
+# $3 - file name
+function process_file()
+{
+	local source_dir=$1
+	local destination_dir=$2
+	local filename=$3
+	local mode=$4
+
+	# create destination directory if it doesn't exist
+	if ! [ -d $destination_dir ];then
+		mkdir -p $destination_dir
+	fi
+
+	# if the destination file exists delete it
+	if [ -e $destination_dir/$filename ];then
+		rm $destination_dir/$filename
+	fi
+	# copy file or create a symbolic link
+	if [ $mode = "copy" ];then
+		ditto -v $source_dir/$filename $destination_dir/$filename
+	elif [ $mode = "link" ]; then
+		ln -sfhv $source_dir/$filename $destination_dir/$filename
+	fi
+
+}
+
+# process directory and copy/link folders/files
+# args
+#
+# $1 - source directory
+# $2 - destination directory
+function process_directory()
+{
+
+	local source_dir=$1
+	local destination_dir=$2
+	local mode=$3
+	shift 3
+	local ignore=$@
+	
+	
+	shopt -s dotglob
+	# iterate and process all files/directories in source $1 
+	for f in $source_dir/*;
+	do
+		current_file=$(basename $f)
+		# if file is in ingore list skip it
+		if in_array "$current_file" "${ignore[@]}";then
+			continue
+		fi
+
+		if [ -d $source_dir/$current_file ];then
+			process_directory $source_dir/$current_file $destination_dir/$current_file $mode "${ignore[@]}"
+		else 
+			process_file $source_dir $destination_dir $current_file $mode
+		fi
+	done
+
+}

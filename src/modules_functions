@@ -1,0 +1,58 @@
+
+#!/usr/bin/env bash
+
+#
+# args:
+#
+# $1 module name
+function module_exists()
+{
+	module_path="../modules/$1"
+	if [ -d $module_path ];then
+		return 0
+	fi
+	return 1
+}
+
+
+#
+# args:
+#
+# $1 module name
+function module_config_exists()
+{
+	module_config_path="../modules/$1/config"
+	if [ -e $module_config_path ];then
+		return 0
+	fi
+	return 1
+}
+
+
+#
+# args:
+#
+# $1 module name
+function process_module()
+{
+
+	module=$(basename $1)
+	echo "Processing module: $module";
+
+	if ! module_exists $module;then
+		echo "Module $module does not exist"
+		return 1
+	fi
+
+	if ! module_config_exists $module;then
+		echo "Module $module config does not exist"
+		return 1
+	fi
+
+	source "../modules/$module/config"
+	source process_functions
+	process_directory $SOURCE_FOLDER $DEST_FOLDER $MODE "${IGNORE[@]}"
+	echo "Done"
+	
+}
+

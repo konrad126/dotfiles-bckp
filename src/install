@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+source modules_functions
+
+
+# process all modules
+for f in "../modules"/*;
+do
+	process_module $f
+done
