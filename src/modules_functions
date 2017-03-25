@@ -47,6 +47,7 @@ function init_module()
 
 	echo "Initializing module: $module"
 	ditto -v $CONFIG_STUB_PATH "$CONFIG_PATH/$module.config"
+	echo "Module initialized - go configure it"
 }
 
 
@@ -62,6 +63,12 @@ function init_modules()
 }
 
 
+function display_module_info()
+{
+	if [ -e $MODULES_PATH/$module.info ];then
+		cat $MODULES_PATH/$module.info
+	fi
+}
 #
 # args:
 #
@@ -70,7 +77,7 @@ function process_module()
 {
 
 	local module=$1
-	echo "Processing module: $module";
+	echo "Adding module: $module";
 
 	if ! module_exists $module;then
 		echo "Module $module does not exist!"
@@ -85,6 +92,10 @@ function process_module()
 	source "$CONFIG_PATH/$module.config"
 	source src/file_functions
 	process_directory $MODULES_PATH/$module $DEST_FOLDER $MODE "${IGNORE[@]}"
+
+
+	display_module_info $module
+
 	echo "Done"
 }
 
