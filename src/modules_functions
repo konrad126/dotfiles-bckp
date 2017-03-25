@@ -2,9 +2,11 @@
 #!/usr/bin/env bash
 
 source src/constants
+
+
+# checks if module exits
 #
 # args:
-#
 # $1 module name
 function module_exists()
 {
@@ -17,9 +19,9 @@ function module_exists()
 }
 
 
+# checks for module config file
 #
 # args:
-#
 # $1 module name
 function module_config_exists()
 {
@@ -32,9 +34,8 @@ function module_config_exists()
 }
 
 
-#
+# Initializes module - creates module config file
 # args:
-#
 # $1 module name
 function init_module()
 {
@@ -47,12 +48,11 @@ function init_module()
 
 	echo "Initializing module: $module"
 	ditto -v $CONFIG_STUB_PATH "$CONFIG_PATH/$module.config"
-	echo "Module initialized - go configure it"
+	echo "Done"
 }
 
 
-#
-# init all modules
+# Initialize all modules
 function init_modules()
 {
 	for f in "$MODULES_PATH"/*;
@@ -63,21 +63,22 @@ function init_modules()
 }
 
 
+# display module info file if it exists
 function display_module_info()
 {
-	if [ -e $MODULES_PATH/$module.info ];then
-		cat $MODULES_PATH/$module.info
+	if [ -e $STUB_PATH/$module.info ];then
+		cat $STUB_PATH/$module.info
 	fi
 }
+
+# Add module
 #
 # args:
-#
 # $1 module name
-function process_module()
+function add_module()
 {
 
 	local module=$1
-	echo "Adding module: $module";
 
 	if ! module_exists $module;then
 		echo "Module $module does not exist!"
@@ -89,9 +90,11 @@ function process_module()
 		return 1
 	fi
 
+	echo "Adding module: $module";
+
 	source "$CONFIG_PATH/$module.config"
 	source src/file_functions
-	process_directory $MODULES_PATH/$module $DEST_FOLDER $MODE "${IGNORE[@]}"
+	process_directory $MODULES_PATH/$module $DEST_FOLDER $MODE $OP_ADD "${IGNORE[@]}"
 
 
 	display_module_info $module
@@ -100,14 +103,43 @@ function process_module()
 }
 
 
-#
-# process all modules
-function process_modules()
+# Add all modules
+function add_modules()
 {
-	# process all modules
 	for f in $MODULES_PATH/*;
 	do
 		module=$(basename $f)
-		process_module $module
+		add_module $module
+	done
+}
+
+# Removes a module
+#
+# args:
+# $1 - module name
+function remove_module()
+{
+	local module=$1
+
+	if ! module_exists $module;then
+		echo "Module $module does not exist!"
+		return 1
+	fi
+
+	echo "Removing module: $module";
+
+	source "$CONFIG_PATH/$module.config"
+	source src/file_functions
+	process_directory $MODULES_PATH/$module $DEST_FOLDER $MODE $OP_REMOVE "${IGNORE[@]}"
+}
+
+
+# Remove all modules
+function remove_modules()
+{
+	for f in $MODULES_PATH/*;
+	do
+		module=$(basename $f)
+		remove_module $module
 	done
 }

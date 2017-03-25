@@ -11,3 +11,7 @@ CONFIG_PATH="$APP_DIR/config"
 
 # modules folder path
 MODULES_PATH="$APP_DIR/stubs/modules"
+
+# operations
+OP_ADD="add"
+OP_REMOVE="remove"
