@@ -1,0 +1,3 @@
+Bash module added.
+
+To add more (machine specific) settings create .bash_extra file and add them there.

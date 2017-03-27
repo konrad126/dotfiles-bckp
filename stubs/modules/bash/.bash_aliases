@@ -12,5 +12,5 @@ alias ....="cd ../../"
 alias showdotfiles="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hidedotfiles="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
-# Sublime
+# Open in current directory when running subl
 alias subl="subl ."
