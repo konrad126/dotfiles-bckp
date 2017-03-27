@@ -9,6 +9,9 @@ CONFIG_STUB_PATH="$APP_DIR/stubs/config/config"
 # config file destination path
 CONFIG_PATH="$APP_DIR/config"
 
+# info files path
+INFO_PATH="$APP_DIR/stubs/info"
+
 # modules folder path
 MODULES_PATH="$APP_DIR/stubs/modules"
 

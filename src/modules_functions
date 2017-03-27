@@ -66,8 +66,8 @@ function init_modules()
 # display module info file if it exists
 function display_module_info()
 {
-	if [ -e $STUB_PATH/$module.info ];then
-		cat $STUB_PATH/$module.info
+	if [ -e $INFO_PATH/$module.info ];then
+		cat $INFO_PATH/$module.info
 	fi
 }
 
