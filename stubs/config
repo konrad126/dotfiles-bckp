@@ -2,7 +2,7 @@
 
 
 # add destination for your module
-# all files from stubs/modules/module_name will be linked/copied 
+# all files from modules/module_name directory will be linked/copied 
 # to the DEST_FOLDER location
 DEST_FOLDER=""
 
