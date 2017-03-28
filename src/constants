@@ -13,7 +13,7 @@ CONFIG_PATH="$APP_DIR/config"
 INFO_PATH="$APP_DIR/stubs/info"
 
 # modules folder path
-MODULES_PATH="$APP_DIR/stubs/modules"
+MODULES_PATH="$APP_DIR/modules"
 
 # operations
 OP_ADD="add"
