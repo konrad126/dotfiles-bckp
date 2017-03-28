@@ -44,12 +44,18 @@ My configuration files
 	sh confiles add - m bash
 	sh confiles init -m bash
 	```
+## De-installation
 
-6. To remove files, run 
+1. To remove file(s), run 
 	```bash
 	sh confiles remove
 	sh confiles remove -m bash
 	```
+
+## Additional
+
+In folder runnables put some additional scripts to rune. Eg. macos script set some macos defaults I use.
+
 
 ## Acknowledgements
 
