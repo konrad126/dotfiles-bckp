@@ -8,15 +8,30 @@ NAME
      confiles -- add or remove modules for confiles
 
 SYNOPSIS
-     confiles [-m] [module-name]
+     confiles [OPTION] [-m] [module-name]
 
 DESCRIPTION
-     Dotfiles will init, add or remove module. For additional info check README.md
+    Dotfiles will init, add or remove module. For additional info check README.md
      
-     The options are as follows:
+     The OPTION are as follows:
+     - add
+     - remove
+     - init_module
+
+     Additional option:
      -m module-name  Runs for induvidual modules
 "
 }
+
+
+function print_usage()
+{
+	printf "
+Usage: confiles [OPTION] [-m] [module-name]
+Try confiles --help for more options.
+"
+}
+
 
 mode=$1
 shift
@@ -30,6 +45,7 @@ case $1 in
 		module_name=$1
 		if [ "$module_name" = "" ];then
 			echo "Missing module name"
+			print_usage
 			exit
 		fi
 		shift
@@ -37,8 +53,9 @@ case $1 in
 esac
 
 # there can be no additional arguments
-if [ $# -gt 0 ];then
-	print_help
+if [ $# -gt 0 ];then	
+	echo "To many arguments"
+	print_usage
 	exit
 fi
 
@@ -66,7 +83,7 @@ case $mode in
 			fi
 			;;
 		*)
-			print_help
+			print_usage
 			exit
 			;;
 esac
