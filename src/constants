@@ -10,7 +10,7 @@ CONFIG_STUB_PATH="$APP_DIR/stubs/config/config"
 CONFIG_PATH="$APP_DIR/config"
 
 # info files path
-INFO_PATH="$APP_DIR/stubs/info"
+INFO_PATH="$APP_DIR/info"
 
 # modules folder path
 MODULES_PATH="$APP_DIR/modules"
