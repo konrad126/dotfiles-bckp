@@ -33,7 +33,7 @@ My configuration files
 
 	To run script for single module use -m options and provide module name:
 	```bash
-	sh confiles add - module-name
+	sh confiles add -m module-name
 	```
 
 4. If you want to show some additional message after adding the module create module-name.info file in the info directory and put yor message 
