@@ -44,6 +44,7 @@ My configuration files
 	sh confiles add - m bash
 	sh confiles init -m bash
 	```
+	
 ## De-installation
 
 1. To remove file(s), run 
@@ -56,6 +57,13 @@ My configuration files
 
 In folder runnables put some additional scripts to rune. Eg. macos script set some macos defaults I use.
 
+## Adding new module
+
+1. Add a new directory to modules directory. The name of the directory you add will be the name of the module.
+
+2. Add to module directory all files or modules you want.
+
+3. Follow steps from instalation procedure.
 
 ## Acknowledgements
 
