@@ -1,13 +1,13 @@
 # config files
 
-My configuration files
+My configuration (dot) files.
 
 ## Installation
 
 1. Clone the repository in some directory:
 
 	```bash
-	git clone https://github.com/niksy/dotfiles.git ~/.dotfiles
+	git clone git@github.com:zspajich/dotfiles2.0.git my-confiles-dir
 	```
 
 1. Enter the directory where you’ve cloned confiles and run confiles script with `init` argument:
@@ -44,7 +44,7 @@ My configuration files
 	sh confiles add - m bash
 	sh confiles init -m bash
 	```
-	
+
 ## De-installation
 
 1. To remove file(s), run 
