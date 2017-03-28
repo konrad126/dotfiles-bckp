@@ -3,7 +3,19 @@ source src/modules_functions
 
 function print_help()
 {
-	echo "print ussage"
+	printf "
+NAME
+     confiles -- add or remove modules for confiles
+
+SYNOPSIS
+     confiles [-m] [module-name]
+
+DESCRIPTION
+     Dotfiles will init, add or remove module. For additional info check README.md
+     
+     The options are as follows:
+     -m module-name  Runs for induvidual modules
+"
 }
 
 mode=$1
@@ -17,7 +29,7 @@ case $1 in
 		shift
 		module_name=$1
 		if [ "$module_name" = "" ];then
-			echo "missing module name"
+			echo "Missing module name"
 			exit
 		fi
 		shift
