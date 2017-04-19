@@ -18,3 +18,7 @@ shopt -s histappend
 
 # Add tab completion for Vagrant (if it exists)
 [ -f $(brew --prefix)/etc/bash_completion.d/vagrant ] && source $(brew --prefix)/etc/bash_completion.d/vagrant
+
+
+# fix problem with ssh
+ssh-add -K &>/dev/null

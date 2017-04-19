@@ -1,5 +1,20 @@
 
+[alias]
+	# Repository information
+	# --------------------------------------------------------------------------
+	s = status
+	# Simple decorated log with 20 latest commits
+	l = log --oneline --decorate -n 20
+	# Regular log 
+	lg = log
+
+
+	# Commits
+	# --------------------------------------------------------------------------
 
 [include]
-# Set the extra personal settings (e.g. name and email)
-path = ~/.gitconfig_extra
+	# Set the extra personal settings (e.g. name and email)
+	path = ~/.gitconfig_extra
+
+[credential]
+	helper = osxkeychain
